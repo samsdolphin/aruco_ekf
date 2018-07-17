@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
   <name>aruco_pos</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>
-    Tag detector based on Aruco 3.0.10.
+    Pose estimation based on Aruco 3.0.10.
   </description>
   <maintainer email="liuxiyuan95@gmail.com">Xiyuan</maintainer>
   <license>BSD</license>
