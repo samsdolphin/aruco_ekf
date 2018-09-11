@@ -1,10 +1,10 @@
 <launch>
 
-	<node name="rosbag" pkg="rosbag" type="play" respawn="false" args="--delay=1 --queue=1000 $(find aruco_pos)/bag/uvc_camera.bag"/>
+	<node name="rosbag" pkg="rosbag" type="play" respawn="false" args="--delay=1 --queue=1000 $(find aruco_ekf)/bag/uvc_camera.bag"/>
 
-    <node pkg="aruco_pos" type="aruco_pos" name="aruco_pos" output="screen">
-        <param name="cam_config_file" type="string" value="$(find aruco_pos)/config/camera.yml"/>
-        <param name="map_config_file" type="string" value="$(find aruco_pos)/config/map.yml"/>
+    <node pkg="aruco_ekf" type="aruco_ekf" name="aruco_ekf" output="screen">
+        <param name="cam_config_file" type="str" value="$(find aruco_pos)/config/camera.yml"/>
+        <param name="map_config_file" type="str" value="$(find aruco_pos)/config/map.yml"/>
     </node>
 
 </launch>
