@@ -22,10 +22,10 @@ MarkerDetector MDetector;
 MarkerMap MarkerMapConfig;
 ros::Publisher odom_pub;
 cv::Mat K, D;
-Matrix3d w_R_tag = Quaterniond(0, 0, -1, 0).toRotationMatrix(); // TODO
-Matrix3d imu_R_cam = Quaterniond(0, 0, -1, 0).toRotationMatrix(); //TODO
-Vector3d imu_T_cam(0, 0, 0); //TODO
-Vector3d tag_T_w(0, 0, 0); //TODO
+Matrix3d w_R_tag = Quaterniond(0.707107, 0, 0.707107, 0).toRotationMatrix(); // TODO
+Matrix3d imu_R_cam = Quaterniond(0.5, -0.5, 0.5, -0.5).toRotationMatrix(); //TODO
+Vector3d imu_T_cam(0.08, 0, 0.03); //TODO
+Vector3d tag_T_w(-1, 0, 0); //TODO
 MatrixXd Q = MatrixXd::Identity(12, 12);
 MatrixXd Rt = MatrixXd::Identity(6,6);
 MatrixXd X = MatrixXd::Zero(15,1);
@@ -214,7 +214,7 @@ void odom_callback(const sensor_msgs::ImageConstPtr &img_msg)
                 cv::putText(InImage, str, m[i], CV_FONT_HERSHEY_COMPLEX, 0.6, cv::Scalar(0,0,255,255));
             }
 
-            m.draw(InImage);
+            //m.draw(InImage);
         }
 
         if (pts_3.size() > 20)
@@ -238,7 +238,7 @@ int main(int argc, char **argv)
     resizeWindow("view", 640, 360);
 
     ros::Subscriber odom_sub = nh.subscribe("image_raw", 100, odom_callback);
-    ros::Subscriber imu_sub = nh.subscribe("imu", 1000, imu_callback);
+    ros::Subscriber imu_sub = nh.subscribe("djiros/imu", 1000, imu_callback);
     odom_pub = nh.advertise<nav_msgs::Odometry>("odom_ref", 10);
 
     MarkerMapConfig.readFromFile("/home/sam/catkin_ws/src/aruco_ekf/config/map.yml");
